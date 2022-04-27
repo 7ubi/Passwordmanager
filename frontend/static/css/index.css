@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap');
+
+html {
+    font-family: 'Montserrat', sans-serif;
+    background: #343434;
+    color: white;
+}
+
+.inputLabel {
+    font-size: medium;
+    color: white;
+}
+
+.formGrid {
+    margin-top: 30px;
+}
+
+.btn {
+    padding: 10px;
+    color: white;
+    border: 1px solid white;
+    border-radius: 5px;
+    background: transparent;
+}

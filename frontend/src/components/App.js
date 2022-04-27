@@ -1,19 +1,27 @@
-import React, { Component } from "react";
-import { render } from 'react-dom';
+import React from "react";
+import { render} from "react-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+} from "react-router-dom";
 
-export default class App extends Component{
-    constructor(props) {
-        super(props);
-    }
+import Login from './login/Login';
+import Signup from "./login/Signup";
 
-    render(){
-        return (
-            <h1>
-                Password
-            </h1>
-        );
-    }
+function App(){
+    return (
+        <Router>
+            <Routes>
+                <Route exact path="/" element={ <Login />} />
+                <Route path="/login" element={ <Login /> } />
+                <Route path="/signup" element={ <Signup /> } />
+            </Routes>
+        </Router>
+    );
 }
+
+export default App;
 
 const appDiv = document.getElementById('app');
 render(<App />, appDiv);
