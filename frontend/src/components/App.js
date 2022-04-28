@@ -8,12 +8,14 @@ import {
 
 import Login from './login/Login';
 import Signup from "./login/Signup";
+import PasswordStorage from "./passwordmanager/PasswordStorage";
+
 
 function App(){
     return (
         <Router>
             <Routes>
-                <Route exact path="/" element={ <Login />} />
+                <Route exact path="/" element={ <PasswordStorage />} />
                 <Route path="/login" element={ <Login /> } />
                 <Route path="/signup" element={ <Signup /> } />
             </Routes>

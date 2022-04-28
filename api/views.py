@@ -1,8 +1,8 @@
 import json
 
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from rest_framework.decorators import api_view
 
 from rest_framework.views import APIView
@@ -56,3 +56,8 @@ def LoginUserView(request):
         return Response(status=status.HTTP_200_OK)
     else:
         return Response(status=status.HTTP_422_UNPROCESSABLE_ENTITY)
+
+
+def logoutView(request):
+    logout(request)
+    return redirect('/login')
