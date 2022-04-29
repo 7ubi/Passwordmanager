@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { FormControl, FormHelperText, Grid, TextField } from "@mui/material";
-import FormTextInput from "./FormTextInput";
+import FormTextInput from "../generic/FormTextInput";
 
 const Signup = ({  }) => {
     const [username, setUsername] = useState('');

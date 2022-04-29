@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {Grid} from "@mui/material";
-import FormTextInput from "./FormTextInput";
+import FormTextInput from "../generic/FormTextInput";
 
 const Login = ({  }) => {
     const [username, setUsername] = useState('');
