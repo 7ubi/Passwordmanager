@@ -1,9 +1,7 @@
-import {FormControl, FormHelperText, TextField} from "@mui/material";
+import {FormControl, FormHelperText, styled, TextField} from "@mui/material";
 import React from "react";
 
 const FormTextInput = ({ onChange, label, placeHolder, inputType }) => {
-
-
     return (
         <FormControl>
             <TextField
@@ -12,9 +10,32 @@ const FormTextInput = ({ onChange, label, placeHolder, inputType }) => {
                 placeholder={ placeHolder }
                 label={ label }
                 onChange={ onChange }
+
                 InputLabelProps={{
                     style: {
                         color: "white",
+                        borderWidth: "5px",
+                        borderColor: "white"
+                    }
+                }}
+                FormHelperTextProps={{
+                    style: {
+                        color: "white",
+                        borderWidth: "5px",
+                        borderColor: "white"
+                    }
+                }}
+                inputProps={{
+                    style: {
+                        color: "white",
+                        borderWidth: "5px",
+                        borderColor: "white"
+                    }
+                }}
+                SelectProps={{
+                    style: {
+                        borderWidth: "5px",
+                        borderColor: "white"
                     }
                 }}
                 InputProps={{
@@ -23,8 +44,7 @@ const FormTextInput = ({ onChange, label, placeHolder, inputType }) => {
                         borderColor: "white"
                     }
                 }}
-
-                multiline
+                variant="outlined"
             />
         </FormControl>
     );

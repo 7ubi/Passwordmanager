@@ -58,6 +58,31 @@ def LoginUserView(request):
         return Response(status=status.HTTP_422_UNPROCESSABLE_ENTITY)
 
 
+class CreatePasswordView(APIView):
+    serializer_class = CreatePasswordSerializer
+
+    def post(self, request):
+        serializer = self.serializer_class(data=request.data)
+
+        if serializer.is_valid():
+            title = request.data.get('title')
+            password = request.data.get('password')
+            username = request.data.get('username')
+            website = request.data.get('website')
+
+            newPassword: Password = Password(
+                title=title,
+                password=password,
+                username=username,
+                website=website
+            )
+
+            newPassword.save()
+            return Response(CreatePasswordSerializer(newPassword).data, status=status.HTTP_201_CREATED)
+
+        return Response(status=status.HTTP_400_BAD_REQUEST)
+
+
 def logoutView(request):
     logout(request)
     return redirect('/login')

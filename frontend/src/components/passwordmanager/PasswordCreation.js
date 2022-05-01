@@ -1,11 +1,58 @@
-import React from "react";
-import {Grid} from "@mui/material";
+import React, {useState} from "react";
+import {Grid, useMediaQuery} from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 import FormTextInput from "../generic/FormTextInput";
+import getCookie from "../generic/getCookie";
 
 const PasswordCreation = ({ closeModal }) => {
+    const desktop = useMediaQuery('(min-width:600px)');
+
+    const [title, setTitle] = useState('');
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [website, setWebsite] = useState('');
+
+    const changeTitle = (e) => {
+        setTitle(e.target.value);
+    }
+
+    const changeUsername = (e) => {
+        setUsername(e.target.value);
+    }
+
+    const changePassword = (e) => {
+        setPassword(e.target.value);
+    }
+
+    const changeWebsite = (e) => {
+        setWebsite(e.target.value);
+    }
+
+    const onSubmit = (e) => {
+        e.preventDefault();
+
+        const requestOptions = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-Token': getCookie('CSRF-TOKEN')
+            },
+            body: JSON.stringify({
+                title: title,
+                username: username,
+                password: password,
+                website: website
+            })
+        };
+
+        // TODO encrypt password
+        fetch('/api/createPassword', requestOptions)
+            .then((response) => response.json())
+            .then((data) => console.log(data));
+    }
+
     return (
-        <form>
+        <form onSubmit={ onSubmit }>
             <Grid container spacing={1}>
                 <Grid item xs={12} align="center">
                     <h1>
@@ -13,18 +60,18 @@ const PasswordCreation = ({ closeModal }) => {
                     </h1>
                     <CloseIcon onClick={ closeModal } className="top-right" />
                 </Grid>
-                <Grid container spacing={2}>
-                    <Grid item xs={6} align="center">
-                        <FormTextInput label="Title" placeHolder="Title..." inputType="text" />
+                <Grid container spacing={desktop ? 2: 1}>
+                    <Grid item xs={desktop ? 6: 12} align="center">
+                        <FormTextInput label="Title" placeHolder="Title..." inputType="text" onChange={ (e) => changeTitle(e) } />
                     </Grid>
-                    <Grid item xs={6} align="center">
-                        <FormTextInput label="Username" placeHolder="Username..." inputType="text" />
+                    <Grid item xs={desktop ? 6: 12} align="center">
+                        <FormTextInput label="Username" placeHolder="Username..." inputType="text" onChange={ (e) => changeUsername(e) } />
                     </Grid>
-                    <Grid item xs={6} align="center">
-                        <FormTextInput label="Password" placeHolder="Password..." inputType="text" />
+                    <Grid item xs={desktop ? 6: 12} align="center">
+                        <FormTextInput label="Password" placeHolder="Password..." inputType="text" onChange={ (e) => changePassword(e) } />
                     </Grid>
-                    <Grid item xs={6} align="center">
-                        <FormTextInput label="Website" placeHolder="Website..." inputType="text" />
+                    <Grid item xs={desktop ? 6: 12} align="center">
+                        <FormTextInput label="Website" placeHolder="Website..." inputType="text" onChange={ (e) => changeWebsite(e) } />
                     </Grid>
                 </Grid>
                 <Grid item xs={12} align="center">

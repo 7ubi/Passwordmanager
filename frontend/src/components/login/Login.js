@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import {Grid} from "@mui/material";
 import FormTextInput from "../generic/FormTextInput";
+import getCookie from "../generic/getCookie";
 
 const Login = ({  }) => {
     const [username, setUsername] = useState('');
@@ -13,21 +14,6 @@ const Login = ({  }) => {
 
     const changePassword = (e) => {
         setPassword(e.target.value);
-    }
-
-    function getCookie(name) {
-      if (!document.cookie) {
-        return null;
-      }
-
-      const xsrfCookies = document.cookie.split(';')
-        .map(c => c.trim())
-        .filter(c => c.startsWith(name + '='));
-
-      if (xsrfCookies.length === 0) {
-        return null;
-      }
-      return decodeURIComponent(xsrfCookies[0].split('=')[1]);
     }
 
     const onSubmit = (e) => {

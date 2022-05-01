@@ -58,24 +58,6 @@ html {
     right: 25px;
 }
 
-/* for change border color*/
-.MuiOutlinedInput-root.Mui-focused.MuiOutlinedInput-notchedOutline{
-    border-color: white !important;
-}
-
-/*for change label color in focus state*/
-.MuiFormLabel-root.Mui-focused{
-    color: white !important;
-}
-
-.MuiOutlinedInput-input.MuiInputBase-input.MuiInputBase-inputMultiline {
-    color: white !important;
-}
-
-.MuiOutlinedInput-input {
-    color: white !important;
-}
-
 /**
     Desktop specific
  */
