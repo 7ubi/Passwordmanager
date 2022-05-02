@@ -34,11 +34,16 @@ const Signup = ({  }) => {
         };
 
         // TODO make it more secure
+        // TODO add ERROR
         fetch('/api/createUser', requestOptions)
-            .then((response) => response.json())
-            .then((data) => console.log(data));
+            .then((response) => {
+                if(response.status === 201){
+                    location.href = "/login";
+                }
+            });
     }
 
+    // TODO repeat password
     return (
         <form onSubmit={ onSubmit }>
             <Grid container spacing={1}>
