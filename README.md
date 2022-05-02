@@ -36,6 +36,12 @@ In the file write the following:
 SECRET_KEY='YOUR GENERATED KEY'
 ```
 
+3. Run all migrations for the database with these commands in the main directory
+```
+python manage.py makemigrations
+python manage.py migrate
+```
+
 ## Running on local machine
 
 To start the <b>Django</b> server, run this command from the directory of the project
