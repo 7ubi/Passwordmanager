@@ -1,52 +1,21 @@
 import {FormControl, FormHelperText, styled, TextField} from "@mui/material";
 import React from "react";
 
-const FormTextInput = ({ onChange, label, placeHolder, inputType }) => {
+const FormTextInput = ({ onChange, label, placeHolder, inputType, error="" }) => {
     return (
-        <FormControl>
-            <TextField
-                required={ true }
-                type={ inputType }
-                placeholder={ placeHolder }
-                label={ label }
-                onChange={ onChange }
-
-                InputLabelProps={{
-                    style: {
-                        color: "white",
-                        borderWidth: "5px",
-                        borderColor: "white"
-                    }
-                }}
-                FormHelperTextProps={{
-                    style: {
-                        color: "white",
-                        borderWidth: "5px",
-                        borderColor: "white"
-                    }
-                }}
-                inputProps={{
-                    style: {
-                        color: "white",
-                        borderWidth: "5px",
-                        borderColor: "white"
-                    }
-                }}
-                SelectProps={{
-                    style: {
-                        borderWidth: "5px",
-                        borderColor: "white"
-                    }
-                }}
-                InputProps={{
-                    style: {
-                        borderWidth: "5px",
-                        borderColor: "white"
-                    }
-                }}
-                variant="outlined"
-            />
-        </FormControl>
+        <div className="form-text-div">
+            <label className="form-text-label">
+                <input
+                    id={ label }
+                    type={ inputType }
+                    onChange={ onChange }
+                    className={ error !== "" ? "form-text-input input-error": "form-text-input" }
+                    placeholder={ placeHolder }
+                    required={ true }
+                />
+                <span>{ label }</span>
+            </label>
+        </div>
     );
 }
 

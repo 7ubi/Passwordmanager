@@ -41,7 +41,7 @@ const Login = ({  }) => {
     }
 
     return (
-        <form onSubmit={ onSubmit }>
+        <form onSubmit={ onSubmit } className="login">
             <Grid container spacing={1}>
                 <Grid item xs={12} align="center">
                     <h1>
@@ -57,10 +57,22 @@ const Login = ({  }) => {
                     </Grid>
                 }
                 <Grid item xs={12} align="center">
-                    <FormTextInput onChange={ (e) => {changeUsername(e)}} label="Username" placeHolder="Username..." inputType="text" />
+                    <FormTextInput
+                        onChange={ (e) => {changeUsername(e)}}
+                        label="Username"
+                        placeHolder="Username..."
+                        inputType="text"
+                        error={ error }
+                    />
                 </Grid>
                 <Grid item xs={12} align="center">
-                    <FormTextInput onChange={ (e) => {changePassword(e)}} label="Password" placeHolder="Password..." inputType="password" />
+                    <FormTextInput
+                        onChange={ (e) => {changePassword(e)}}
+                        label="Password"
+                        placeHolder="Password..."
+                        inputType="password"
+                        error={ error }
+                    />
                 </Grid>
                 <Grid item xs={12} align="center">
                     <input className="btn formGrid" type="submit" value= "Login" />

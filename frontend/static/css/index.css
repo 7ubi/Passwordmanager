@@ -6,11 +6,6 @@ html {
     color: white;
 }
 
-.inputLabel {
-    font-size: medium;
-    color: white;
-}
-
 .formGrid {
     margin-top: 30px;
 }
@@ -22,6 +17,7 @@ html {
     border-radius: 5px;
     background: transparent;
     transition: 0.5s;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .btn:hover  {
@@ -58,6 +54,8 @@ html {
     right: 25px;
 }
 
+
+
 /**
     Desktop specific
  */
@@ -66,5 +64,10 @@ html {
         width: 50%;
         margin: auto;
         height: 80%;
+    }
+
+    .login {
+        width: 50%;
+        margin: auto;
     }
 }

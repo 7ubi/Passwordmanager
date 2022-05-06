@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap');
+
+
+.form-text-input {
+    background-color: transparent;
+    border: none;
+    outline:none;
+    border-bottom: 1px solid white;
+    width:100%;
+    padding:10px 0px;
+    margin-top:20px;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-size: medium;
+}
+
+input::placeholder {
+     color: transparent;
+}
+
+.form-text-div {
+    position: relative;
+    padding: 10%;
+}
+
+span{
+    padding: 10%;
+    position:absolute;
+    top:0;
+    left:0;
+    transform:translateY(30px);
+    transition-duration:300ms;
+}
+
+label:focus-within > span,
+input:not(:placeholder-shown) ~ span,
+input:-webkit-autofill ~ span,
+input:-webkit-autofill:hover ~ span,
+input:-webkit-autofill:focus ~ span
+{
+    transform:translateY(0px);
+}
+
+
+/* Change the white to any color */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus{
+    -webkit-text-fill-color: white;
+    -webkit-box-shadow: 0 0 0px 1000px rgba(0, 0, 0, 0) inset;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+.input-error {
+    border-bottom: 1px solid red;
+}

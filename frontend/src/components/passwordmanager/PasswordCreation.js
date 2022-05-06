@@ -47,8 +47,7 @@ const PasswordCreation = ({ closeModal }) => {
 
         // TODO encrypt password
         fetch('/api/createPassword', requestOptions)
-            .then((response) => response.json())
-            .then((data) => console.log(data));
+            .then((response) => response.json());
     }
 
     return (
