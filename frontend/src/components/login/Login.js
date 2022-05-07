@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {Grid} from "@mui/material";
 import FormTextInput from "../generic/FormTextInput";
-import getCookie from "../generic/getCookie";
+import createPostRequest from "../generic/CreatePostRequest";
 
 const Login = ({  }) => {
     const [username, setUsername] = useState('');
@@ -19,18 +19,11 @@ const Login = ({  }) => {
     const onSubmit = (e) => {
         e.preventDefault();
 
-        const requestOptions = {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json', 'X-CSRF-Token': getCookie('CSRF-TOKEN')},
-            body: JSON.stringify({
-                username: username,
-                password: password
-            })
-        };
-
         // TODO make it more secure
-        // TODO better error handling
-        fetch('/api/loginUser', requestOptions)
+        fetch('/api/loginUser', createPostRequest({
+            username: username,
+            password: password
+        }))
             .then((response) => {
                 if(response.status === 200) {
                     location.href = "/";
@@ -48,14 +41,6 @@ const Login = ({  }) => {
                         Login
                     </h1>
                 </Grid>
-                {
-                    error !== "" &&
-                    <Grid item xs={12} align="center">
-                        <p className="error">
-                            <b>{ error }</b>
-                        </p>
-                    </Grid>
-                }
                 <Grid item xs={12} align="center">
                     <FormTextInput
                         onChange={ (e) => {changeUsername(e)}}
@@ -74,6 +59,14 @@ const Login = ({  }) => {
                         error={ error }
                     />
                 </Grid>
+                {
+                    error !== "" &&
+                    <Grid item xs={12} align="center">
+                        <p className="error">
+                            <b>{ error }</b>
+                        </p>
+                    </Grid>
+                }
                 <Grid item xs={12} align="center">
                     <input className="btn formGrid" type="submit" value= "Login" />
                 </Grid>

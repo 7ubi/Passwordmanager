@@ -1,20 +1,38 @@
-import {FormControl, FormHelperText, styled, TextField} from "@mui/material";
 import React from "react";
 
-const FormTextInput = ({ onChange, label, placeHolder, inputType, error="" }) => {
+const FormTextInput = ({
+    onChange,
+    label,
+    placeHolder,
+    inputType,
+    error="",
+    errorMessage=false,
+    required=true,
+    divClasses="",
+    labelClasses="",
+    inputClasses=""
+}) => {
     return (
-        <div className="form-text-div">
-            <label className="form-text-label">
+        <div className={ "form-text-div " + divClasses }>
+            <label className={ "form-text-label " + labelClasses}>
                 <input
                     id={ label }
                     type={ inputType }
                     onChange={ onChange }
-                    className={ error !== "" ? "form-text-input input-error": "form-text-input" }
+                    className={ error !== "" ? "form-text-input input-error " + inputClasses: "form-text-input " + inputClasses }
                     placeholder={ placeHolder }
-                    required={ true }
+                    required={ required }
                 />
-                <span>{ label }</span>
+                <span>{ label }{ required ? "*" : ""}</span>
             </label>
+            <p className="error">
+                <b>
+                {
+                    errorMessage &&
+                    error
+                }
+                </b>
+            </p>
         </div>
     );
 }

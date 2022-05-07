@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {Grid, useMediaQuery} from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 import FormTextInput from "../generic/FormTextInput";
-import getCookie from "../generic/getCookie";
+import createPostRequest from "../generic/CreatePostRequest";
 
 const PasswordCreation = ({ closeModal }) => {
     const desktop = useMediaQuery('(min-width:600px)');
@@ -35,7 +35,7 @@ const PasswordCreation = ({ closeModal }) => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'X-CSRF-Token': getCookie('CSRF-TOKEN')
+                'X-CSRF-Token': createPostRequest('CSRF-TOKEN')
             },
             body: JSON.stringify({
                 title: title,
@@ -61,16 +61,16 @@ const PasswordCreation = ({ closeModal }) => {
                 </Grid>
                 <Grid container spacing={desktop ? 2: 1}>
                     <Grid item xs={desktop ? 6: 12} align="center">
-                        <FormTextInput label="Title" placeHolder="Title..." inputType="text" onChange={ (e) => changeTitle(e) } />
+                        <FormTextInput label="Title" placeHolder="Title..." inputType="text" onChange={ (e) => changeTitle(e) } divClasses="form-text-padding" labelClasses="form-text-padding" />
                     </Grid>
                     <Grid item xs={desktop ? 6: 12} align="center">
-                        <FormTextInput label="Username" placeHolder="Username..." inputType="text" onChange={ (e) => changeUsername(e) } />
+                        <FormTextInput label="Username" placeHolder="Username..." inputType="text" onChange={ (e) => changeUsername(e) }  divClasses="form-text-padding" labelClasses="form-text-padding"/>
                     </Grid>
                     <Grid item xs={desktop ? 6: 12} align="center">
-                        <FormTextInput label="Password" placeHolder="Password..." inputType="text" onChange={ (e) => changePassword(e) } />
+                        <FormTextInput label="Password" placeHolder="Password..." inputType="text" onChange={ (e) => changePassword(e) }  divClasses="form-text-padding" labelClasses="form-text-padding"/>
                     </Grid>
                     <Grid item xs={desktop ? 6: 12} align="center">
-                        <FormTextInput label="Website" placeHolder="Website..." inputType="text" onChange={ (e) => changeWebsite(e) } />
+                        <FormTextInput label="Website" placeHolder="Website..." inputType="text" onChange={ (e) => changeWebsite(e) }  divClasses="form-text-padding" labelClasses="form-text-padding"/>
                     </Grid>
                 </Grid>
                 <Grid item xs={12} align="center">

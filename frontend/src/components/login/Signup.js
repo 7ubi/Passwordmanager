@@ -2,14 +2,21 @@ import React from "react";
 import { useState } from "react";
 import { FormControl, FormHelperText, Grid, TextField } from "@mui/material";
 import FormTextInput from "../generic/FormTextInput";
+import createPostRequest from "../generic/CreatePostRequest";
 
 const Signup = ({  }) => {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [password_repeat, setPassword_repeat] = useState('');
+    const [usernameExits, setUsernameExits] = useState("");
+    const [passwordMatchError, setPasswordMatchError] = useState("");
+
+    const passwordMatchErrorMessage = "Passwords do not match"
 
     const changeUsername = (e) => {
         setUsername(e.target.value);
+        checkUsername(e.target.value);
     }
 
     const changeEmail = (e) => {
@@ -20,22 +27,44 @@ const Signup = ({  }) => {
         setPassword(e.target.value);
     }
 
-    const onSubmit = (e) => {
+    const changePassword_repeat = (e) => {
+        setPassword_repeat(e.target.value);
+    }
+
+    const checkUsername = (val) => {
+        fetch('/api/checkUsername', createPostRequest({
+            username: val
+        }))
+            .then(async (response) => {
+                let data = await response.json();
+                setUsernameExits(data.username_exits);
+            });
+    }
+
+    const isPasswordMatch = () => {
+        if(password === password_repeat) {
+            setPasswordMatchError("");
+            return true;
+        } else {
+            setPasswordMatchError(passwordMatchErrorMessage);
+            return false;
+        }
+    }
+
+    const createUser = (e) => {
         e.preventDefault();
 
-        const requestOptions = {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({
-                username: username,
-                email: email,
-                password: password
-            })
-        };
+        // You can only create a user if the username doesn't exist already
+        // and if the passwords match
+        if(usernameExits || !isPasswordMatch())
+            return;
 
         // TODO make it more secure
-        // TODO add ERROR
-        fetch('/api/createUser', requestOptions)
+        fetch('/api/createUser', createPostRequest({
+            username: username,
+            email: email,
+            password: password
+        }))
             .then((response) => {
                 if(response.status === 201){
                     location.href = "/login";
@@ -43,9 +72,8 @@ const Signup = ({  }) => {
             });
     }
 
-    // TODO repeat password
     return (
-        <form onSubmit={ onSubmit } className="login">
+        <form onSubmit={ createUser } className="login">
             <Grid container spacing={1}>
 
                 <Grid item xs={12} align="center">
@@ -59,7 +87,8 @@ const Signup = ({  }) => {
                         label="Username"
                         placeHolder="Username..."
                         inputType="text"
-                        error=""
+                        error={ usernameExits }
+                        errorMessage={ true }
                     />
                 </Grid>
                 <Grid item xs={12} align="center">
@@ -77,7 +106,17 @@ const Signup = ({  }) => {
                         label="Password"
                         placeHolder="Password..."
                         inputType="password"
-                        error=""
+                        error={ passwordMatchError }
+                        errorMessage={ true }
+                    />
+                </Grid>
+                <Grid item xs={12} align="center">
+                    <FormTextInput
+                        onChange={ (e) => {changePassword_repeat(e)}}
+                        label="Repeat Password"
+                        placeHolder="Repeat Password..."
+                        inputType="password"
+                        error={ passwordMatchError }
                     />
                 </Grid>
                 <Grid item xs={12} align="center">

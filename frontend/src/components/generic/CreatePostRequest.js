@@ -1,4 +1,4 @@
-export default function getCookie(name) {
+const getCookie = (name) => {
     if (!document.cookie) {
         return null;
     }
@@ -11,4 +11,15 @@ export default function getCookie(name) {
         return null;
     }
     return decodeURIComponent(xsrfCookies[0].split('=')[1]);
+}
+
+export default function createPostRequest(body) {
+    return {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-Token': getCookie('CSRF-TOKEN')
+        },
+        body: JSON.stringify(body)
+    }
 }
