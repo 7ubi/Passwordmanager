@@ -4,7 +4,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import FormTextInput from "../generic/FormTextInput";
 import createPostRequest from "../generic/CreatePostRequest";
 
-const PasswordCreation = ({ closeModal }) => {
+const PasswordCreation = ({ closeModal, addPassword }) => {
     const desktop = useMediaQuery('(min-width:600px)');
 
     const [title, setTitle] = useState('');
@@ -28,6 +28,18 @@ const PasswordCreation = ({ closeModal }) => {
         setWebsite(e.target.value);
     }
 
+    const clearInput = () => {
+        document.getElementById('Title').value = "";
+        document.getElementById('Username').value = "";
+        document.getElementById('Password').value = "";
+        document.getElementById('Website').value = "";
+
+        setTitle("");
+        setUsername("");
+        setPassword("");
+        setWebsite("");
+    }
+
     const onSubmit = (e) => {
         e.preventDefault();
 
@@ -38,7 +50,11 @@ const PasswordCreation = ({ closeModal }) => {
                 managed_password: password,
                 website: website
             }))
-            .then((response) => response.json());
+            .then((response) => response.json())
+            .then((data) => addPassword(data));
+
+        clearInput();
+        closeModal();
     }
 
     return (

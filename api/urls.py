@@ -5,6 +5,7 @@ from api.views.password_views import *
 urlpatterns = [
     # Password views
     path('password', PasswordView.as_view()),
+    path('passwordUser', GetManagedPasswordUser.as_view()),
     path('createPassword', CreatePasswordView.as_view()),
 
     # User views
