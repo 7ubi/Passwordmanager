@@ -31,22 +31,13 @@ const PasswordCreation = ({ closeModal }) => {
     const onSubmit = (e) => {
         e.preventDefault();
 
-        const requestOptions = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-Token': createPostRequest('CSRF-TOKEN')
-            },
-            body: JSON.stringify({
+        // TODO encrypt password
+        fetch('/api/createPassword', createPostRequest({
                 title: title,
                 username: username,
-                password: password,
+                managed_password: password,
                 website: website
-            })
-        };
-
-        // TODO encrypt password
-        fetch('/api/createPassword', requestOptions)
+            }))
             .then((response) => response.json());
     }
 

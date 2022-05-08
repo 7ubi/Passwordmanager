@@ -14,11 +14,13 @@ const getCookie = (name) => {
 }
 
 export default function createPostRequest(body) {
+
+
     return {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'X-CSRF-Token': getCookie('CSRF-TOKEN')
+            'X-CSRFTOKEN': getCookie('csrftoken'),
         },
         body: JSON.stringify(body)
     }
