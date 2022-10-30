@@ -15,6 +15,7 @@ const FormTextInput = ({
     return (
         <div className={ "form-text-div " + divClasses }>
             <label className={ "form-text-label " + labelClasses}>
+                <span>{ label }{ required ? "*" : ""}</span>
                 <input
                     id={ label }
                     type={ inputType }
@@ -23,7 +24,6 @@ const FormTextInput = ({
                     placeholder={ placeHolder }
                     required={ required }
                 />
-                <span>{ label }{ required ? "*" : ""}</span>
             </label>
             <p className="error">
                 <b>

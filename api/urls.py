@@ -11,6 +11,7 @@ urlpatterns = [
     # User views
     path('checkUsername/', UsernameExistsView),
     path('createUser/', CreateUserView.as_view()),
+    path('loginUser', LoginUserView),
     path('loginUser/', LoginUserView),
     path('logout/', logoutView),
 ]
