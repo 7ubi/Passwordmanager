@@ -48,7 +48,7 @@ const PasswordStorage = ({  }) => {
             </Grid>
             <Grid xs={12} align="center">
                 <table>
-                    <tr>
+                    <tr className="table-header">
                         <th>
                             Title
                         </th>

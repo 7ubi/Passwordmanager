@@ -59,7 +59,6 @@ const Signup = ({  }) => {
         if(usernameExits || !isPasswordMatch())
             return;
 
-        // TODO make it more secure
         fetch('/api/createUser', createPostRequest({
             username: username,
             email: email,

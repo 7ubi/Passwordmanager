@@ -19,7 +19,6 @@ const Login = ({  }) => {
     const onSubmit = (e) => {
         e.preventDefault();
 
-        // TODO make it more secure
         fetch('/api/loginUser', createPostRequest({
             username: username,
             password: password

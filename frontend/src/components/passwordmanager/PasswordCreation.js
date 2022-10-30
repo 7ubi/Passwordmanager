@@ -43,7 +43,6 @@ const PasswordCreation = ({ closeModal, addPassword }) => {
     const onSubmit = (e) => {
         e.preventDefault();
 
-        // TODO encrypt password
         fetch('/api/createPassword', createPostRequest({
                 title: title,
                 username: username,

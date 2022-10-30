@@ -1,6 +1,3 @@
-import json
-
-from django.core.serializers.json import DjangoJSONEncoder
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication, TokenAuthentication
 from rest_framework.views import APIView
 from rest_framework import generics, status, permissions
