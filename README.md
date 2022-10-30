@@ -1,5 +1,4 @@
-![example workflow](https://github.com/7ubi/Passwordmanager/blob/master/.github/workflows/django.yml/badge.svg)
-
+[![Django CI](https://github.com/7ubi/Passwordmanager/actions/workflows/django.yml/badge.svg)](https://github.com/7ubi/Passwordmanager/actions/workflows/django.yml)
 # Password manager
  Web based password manager using Django and React
 
