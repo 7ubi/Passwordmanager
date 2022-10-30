@@ -1,3 +1,5 @@
+![example workflow](https://github.com/7ubi/Passwordmanager/blob/master/.github/workflows/django.yml/badge.svg)
+
 # Password manager
  Web based password manager using Django and React
 
