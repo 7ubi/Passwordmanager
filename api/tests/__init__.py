@@ -1,2 +1,2 @@
-from .tests import *
-from .clientTests import *
+from .managedPasswordTest import *
+from .managedPasswordClientTests import *
