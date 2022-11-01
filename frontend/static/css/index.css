@@ -13,16 +13,12 @@ html {
 .btn {
     padding: 10px;
     color: white;
-    border: 1px solid white;
-    border-radius: 5px;
+    border: none;
     background: transparent;
     transition: 0.5s;
     font-family: 'Montserrat', sans-serif;
 }
 
-.btn:hover  {
-    box-shadow: 0 0 10px 5px white;
-}
 
 .error {
     color: #ff9090;

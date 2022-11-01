@@ -3,9 +3,9 @@ import {Grid} from "@mui/material";
 
 const PasswordListElement = ({ password }) => {
     return (
-        <tr>
+        <tr className={'managedPassword'}>
             <td>
-                { password.title }
+                <b>{ password.title }</b>
             </td>
             <td>
                 { password.username }

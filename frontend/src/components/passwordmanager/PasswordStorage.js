@@ -30,43 +30,34 @@ const PasswordStorage = ({  }) => {
     return (
         <Grid container spacing={1}>
             <Grid item xs={12} align="center">
-                <h1>
-                    Password storage
-                </h1>
+
             </Grid>
             <Grid xs={12} align="center">
-                <button className="btn" onClick={ onOpen }>
-                    <Grid container spacing={2}>
-                        <Grid item xs={6}>
-                            <div className="vertical-center">Add Password</div>
-                        </Grid>
-                        <Grid item xs={6}>
-                            <AddCircleOutline />
-                        </Grid>
-                    </Grid>
-                </button>
+
             </Grid>
             <Grid xs={12} align="center">
                 <table>
-                    <tr className="table-header">
-                        <th>
-                            Title
-                        </th>
-                        <th>
-                            Username
-                        </th>
-                        <th>
-                            Website
-                        </th>
-                        <th>
-                            Password
-                        </th>
-                    </tr>
-                    {
-                        passwords.map(password =>
-                            <PasswordListElement password={ password } />
-                        )
-                    }
+                    <thead>
+                        <tr>
+                            <th>
+                                <h1>
+                                    Password storage
+                                </h1>
+                            </th>
+                            <th align={"right"}>
+                                <button className="btn" onClick={ onOpen }>
+                                    <AddCircleOutline />
+                                </button>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            passwords.map(password =>
+                                <PasswordListElement password={ password } />
+                            )
+                        }
+                    </tbody>
                 </table>
             </Grid>
             <Modal
