@@ -1,11 +1,17 @@
 import React, {useState} from "react";
-import {Grid, useMediaQuery} from "@mui/material";
+import {Grid, Modal, useMediaQuery} from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 import FormTextInput from "../generic/FormTextInput";
 import createPostRequest from "../generic/CreatePostRequest";
+import AutoStoriesIcon from '@mui/icons-material/AutoStories';
+import PasswordGeneration from "./PasswordGeneration";
 
 const PasswordCreation = ({ closeModal, addPassword }) => {
     const desktop = useMediaQuery('(min-width:600px)');
+
+    const [open, setOpen] = useState(false);
+    const onOpen = () => setOpen(true);
+    const onClose = () => setOpen(false);
 
     const [title, setTitle] = useState('');
     const [username, setUsername] = useState('');
@@ -73,7 +79,10 @@ const PasswordCreation = ({ closeModal, addPassword }) => {
                         <FormTextInput label="Username" placeHolder="Username..." inputType="text" onChange={ (e) => changeUsername(e) }  divClasses="form-text-padding" labelClasses="form-text-padding"/>
                     </Grid>
                     <Grid item xs={desktop ? 6: 12} align="center">
-                        <FormTextInput label="Password" placeHolder="Password..." inputType="text" onChange={ (e) => changePassword(e) }  divClasses="form-text-padding" labelClasses="form-text-padding"/>
+                        <div className="center">
+                            <FormTextInput label="Password" placeHolder="Password..." inputType="text" onChange={ (e) => changePassword(e) }  divClasses="form-text-padding" labelClasses="form-text-padding"/>
+                            <AutoStoriesIcon className="iconBtn" onClick={ onOpen }/>
+                        </div>
                     </Grid>
                     <Grid item xs={desktop ? 6: 12} align="center">
                         <FormTextInput label="Website" placeHolder="Website..." inputType="text" onChange={ (e) => changeWebsite(e) }  divClasses="form-text-padding" labelClasses="form-text-padding"/>
@@ -85,6 +94,14 @@ const PasswordCreation = ({ closeModal, addPassword }) => {
                     </button>
                 </Grid>
             </Grid>
+
+            <Modal
+                open={ open }
+                onClose={ onClose }
+                className="password-modal"
+            >
+                <PasswordGeneration closeModal={ () => onClose() } />
+            </Modal>
         </form>
     );
 }

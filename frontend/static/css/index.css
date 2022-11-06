@@ -45,7 +45,7 @@ html {
 .password-modal {
     display: flex;
     justify-content: center;
-    background-color: #190061B0;
+    background-color: #190061DF;
     border-radius: 10px;
     border: 1px solid #3500D3;
 }
@@ -74,4 +74,14 @@ html {
         width: 50%;
         margin: auto;
     }
+}
+
+.MuiSlider-thumb{
+  color: #3500D3;
+}
+.MuiSlider-rail{
+  color: #190061;
+}
+.MuiSlider-track{
+  color: #3500D3;
 }
