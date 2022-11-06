@@ -11,7 +11,6 @@
     font-family: 'Montserrat', sans-serif;
     font-size: medium;
     float: left;
-    margin-top: 10px;
 }
 
 input::placeholder {
@@ -19,6 +18,7 @@ input::placeholder {
 }
 
 .form-text-div {
+    width: 100%;
     position: relative;
 }
 
@@ -32,7 +32,7 @@ span{
 }
 
 .form-text-padding {
-    margin: 10%;
+    margin: 10px;
 }
 
 .center {

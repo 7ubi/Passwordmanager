@@ -1,9 +1,9 @@
-import React, {useState} from "react";
-import {Grid, Input, Slider, useMediaQuery} from "@mui/material";
+import React, {useEffect, useState} from "react";
+import {Grid, Slider, useMediaQuery} from "@mui/material";
+import Checkbox from '@mui/material/Checkbox';
 import CloseIcon from '@mui/icons-material/Close';
-import FormTextInput from "../generic/FormTextInput";
 import createPostRequest from "../generic/CreatePostRequest";
-import styled from "@emotion/styled";
+import AutorenewIcon from '@mui/icons-material/Autorenew';
 
 const PasswordCreation = ({ closeModal, addPassword }) => {
     const desktop = useMediaQuery('(min-width:600px)');
@@ -13,71 +13,132 @@ const PasswordCreation = ({ closeModal, addPassword }) => {
     const [isSymbol, setIsSymbol] = useState(true);
     const [passwordLength, setPasswordLength] = useState(12);
 
+    const [password, setPassword] = useState('');
+
     const minLength = 6;
     const maxLength = 30;
 
     const handleLengthChange = (event) => {
+        getPassword();
         setPasswordLength(event.target.value === '' ? '' : Number(event.target.value));
     };
 
-    const handleBlur = () => {
-        if (value < minLength) {
-          setPasswordLength(minLength);
-        } else if (value > maxLength) {
-          setPasswordLength(maxLength);
+    const handleUpperChanged = (event) => {
+        getPassword();
+        setIsUpper(event.target.checked);
+    }
+
+    const handleNumberChanged = (event) => {
+        getPassword();
+        setIsNumber(event.target.checked);
+    }
+
+    const handleSymbolChanged = (event) => {
+        getPassword();
+        setIsSymbol(event.target.checked);
+    }
+
+    const checkBoxStyle = {
+        color: '#3500D3',
+        '&.Mui-checked': {
+            color: '#3500D3',
         }
-    };
+    }
+    const getPassword = async () => {
+        await fetch('/api/generatePassword', createPostRequest({
+                length: passwordLength,
+                isUpper: isUpper,
+                isNumber: isNumber,
+                isSymbol: isSymbol
+            }))
+            .then((response) => response.json())
+            .then((data) => setPassword(data));
+    }
 
     const onSubmit = (e) => {
         e.preventDefault();
 
-        fetch('/api/generatePassword', createPostRequest({
-
-            }))
-            .then((response) => response.json())
-            .then((data) => addPassword(data));
+        // insert password in password creation
     }
 
+    useEffect(() => {
+        getPassword();
+    }, [])
+
     return (
-        <form onSubmit={ onSubmit }>
-            <Grid container spacing={1}>
-                <Grid item xs={12} align="center">
-                    <h1>
-                        Generate Password
-                    </h1>
-                    <CloseIcon onClick={ closeModal } className="top-right" />
-                </Grid>
-                <Grid container spacing={desktop ? 2: 1}>
-                    <Grid item xs={12} align="center">
-                        <div className="center">
-                            <span className="center">
-                                Password Length: {passwordLength}
-                            </span>
-                        </div>
-                    </Grid>
-                    <Grid item xs={12} align="center">
-                        <div className="center">
-                            <Slider
-                                aria-label="Length"
-                                defaultValue={12}
-                                min={minLength}
-                                max={maxLength}
-                                onChange={handleLengthChange}
-                                aria-labelledby="input-slider"
-                                style={{
-                                    width: "80%"
-                                }}
-                            />
-                        </div>
-                    </Grid>
-                </Grid>
-                <Grid item xs={12} align="center">
-                    <button className="btn">
-                        Save
-                    </button>
-                </Grid>
+        <Grid container>
+            <Grid item xs={12} align="center">
+                <h1>
+                    Generate Password
+                </h1>
+                <CloseIcon onClick={ closeModal } className="top-right" />
             </Grid>
-        </form>
+            <Grid item xs={12} align="center">
+                <div className="center">
+                    <span className="center">
+                        Password Length: {passwordLength}
+                    </span>
+                </div>
+            </Grid>
+            <Grid item xs={12} align="center">
+                <div className="center">
+                    <Slider
+                        aria-label="Length"
+                        defaultValue={12}
+                        min={minLength}
+                        max={maxLength}
+                        onChange={handleLengthChange}
+                        aria-labelledby="input-slider"
+                        style={{
+                            width: "80%"
+                        }}
+                    />
+                </div>
+            </Grid>
+            <Grid item xs={12} align="center">
+                <div className="center">
+                    <span>Uppercase Letters</span>
+                    <Checkbox
+                        sx={checkBoxStyle}
+                        onChange={handleUpperChanged}
+                        defaultChecked
+                    />
+                </div>
+            </Grid>
+            <Grid item xs={12} align="center">
+                <div className="center">
+                    <span>Numbers</span>
+                    <Checkbox
+                        sx={checkBoxStyle}
+                        onChange={handleNumberChanged}
+                        defaultChecked
+                    />
+                </div>
+            </Grid>
+            <Grid item xs={12} align="center">
+                <div className="center">
+                    <span>Symbols</span>
+                    <Checkbox
+                        sx={checkBoxStyle}
+                        onChange={handleSymbolChanged}
+                        defaultChecked
+                    />
+                </div>
+            </Grid>
+            <Grid item xs={12} align="center">
+                <div className="center">
+                    <span>
+                        { password }
+                    </span>
+                    <AutorenewIcon className="iconBtn" onClick={getPassword} />
+                </div>
+            </Grid>
+            <Grid item xs={12} align="center">
+                <button className="btn">
+                    Save
+                </button>
+            </Grid>
+        </Grid>
     );
 }
 

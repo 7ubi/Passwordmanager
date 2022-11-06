@@ -64,29 +64,42 @@ const PasswordCreation = ({ closeModal, addPassword }) => {
 
     return (
         <form onSubmit={ onSubmit }>
-            <Grid container spacing={1}>
+            <Grid container spacing={2}>
                 <Grid item xs={12} align="center">
-                    <h1>
-                        Create Login
-                    </h1>
+                    <div className="center">
+                        <h1>
+                            Create Login
+                        </h1>
+                    </div>
                     <CloseIcon onClick={ closeModal } className="top-right" />
                 </Grid>
-                <Grid container spacing={desktop ? 2: 1}>
-                    <Grid item xs={desktop ? 6: 12} align="center">
+                <Grid item xs={12} align="center">
+                    <div className="center" style={{padding: "10px"}}>
                         <FormTextInput label="Title" placeHolder="Title..." inputType="text" onChange={ (e) => changeTitle(e) } divClasses="form-text-padding" labelClasses="form-text-padding" />
-                    </Grid>
-                    <Grid item xs={desktop ? 6: 12} align="center">
+                    </div>
+                </Grid>
+                <Grid item xs={12} align="center">
+                    <div className="center" style={{padding: "10px"}}>
                         <FormTextInput label="Username" placeHolder="Username..." inputType="text" onChange={ (e) => changeUsername(e) }  divClasses="form-text-padding" labelClasses="form-text-padding"/>
-                    </Grid>
-                    <Grid item xs={desktop ? 6: 12} align="center">
-                        <div className="center">
-                            <FormTextInput label="Password" placeHolder="Password..." inputType="text" onChange={ (e) => changePassword(e) }  divClasses="form-text-padding" labelClasses="form-text-padding"/>
-                            <AutoStoriesIcon className="iconBtn" onClick={ onOpen }/>
-                        </div>
-                    </Grid>
-                    <Grid item xs={desktop ? 6: 12} align="center">
+                    </div>
+                </Grid>
+                <Grid item xs={12} align="center">
+                    <div className="center" style={{padding: "10px"}}>
+                        <FormTextInput
+                            label="Password"
+                            placeHolder="Password..."
+                            inputType="text"
+                            onChange={ (e) => changePassword(e) }
+                            divClasses="form-text-padding"
+                            labelClasses="form-text-padding"
+                        />
+                        <AutoStoriesIcon className="iconBtn" onClick={ onOpen } style={{float: 'right'}}/>
+                    </div>
+                </Grid>
+                <Grid item xs={12} align="center">
+                    <div className="center" style={{padding: "10px"}}>
                         <FormTextInput label="Website" placeHolder="Website..." inputType="text" onChange={ (e) => changeWebsite(e) }  divClasses="form-text-padding" labelClasses="form-text-padding"/>
-                    </Grid>
+                    </div>
                 </Grid>
                 <Grid item xs={12} align="center">
                     <button className="btn">
