@@ -24,7 +24,7 @@ input::placeholder {
 
 span{
     float: left;
-    left:0;
+    left: 0;
 }
 
 .input-error {
@@ -33,4 +33,10 @@ span{
 
 .form-text-padding {
     margin: 10%;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

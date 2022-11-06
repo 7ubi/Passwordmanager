@@ -2,7 +2,7 @@
 
 html {
     font-family: 'Montserrat', sans-serif;
-    background: #343434;
+    background: #282828;
     color: white;
 }
 
@@ -10,22 +10,24 @@ html {
     margin-top: 30px;
 }
 
+.iconBtn {
+    padding: 10px;
+    color: white;
+    border: none;
+    background: transparent;
+}
+
 .btn {
     padding: 10px;
     color: white;
-    border: 1px solid white;
+    background-color: transparent;
     border-radius: 5px;
-    background: transparent;
-    transition: 0.5s;
+    border: 1px solid #3500D3;
     font-family: 'Montserrat', sans-serif;
 }
 
-.btn:hover  {
-    box-shadow: 0 0 10px 5px white;
-}
-
 .error {
-    color: #ff9090;
+    color: red;
 }
 
 .vertical-center {
@@ -43,9 +45,9 @@ html {
 .password-modal {
     display: flex;
     justify-content: center;
-    background-color: rgba(52, 52, 52, 0.9);
+    background-color: #190061B0;
     border-radius: 10px;
-    border: 1px solid white;
+    border: 1px solid #3500D3;
 }
 
 .top-right {
@@ -54,7 +56,9 @@ html {
     right: 25px;
 }
 
-
+.passwordCircle {
+    font-size: small;
+}
 
 /**
     Desktop specific
