@@ -1,8 +1,11 @@
+import random
+
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication, TokenAuthentication
 from rest_framework.views import APIView
 from rest_framework import generics, status, permissions
 from rest_framework.response import Response
 from api.serializer import *
+import string
 
 
 class PasswordView(generics.ListAPIView):
@@ -53,3 +56,30 @@ class CreatePasswordView(APIView):
             return Response(CreatePasswordSerializer(managed_password).data, status=status.HTTP_201_CREATED)
 
         return Response(status=status.HTTP_400_BAD_REQUEST)
+
+
+class GeneratePassword(APIView):
+    authentication_classes = (SessionAuthentication, BasicAuthentication, TokenAuthentication)
+    permission_classes = (permissions.IsAuthenticated,)
+
+    def get(self, request):
+        possible = string.ascii_lowercase
+
+        isUpper = True  # request.data.get('isUpper')
+        isNumber = True  # request.data.get('isNumber')
+        isSymbol = True  # request.data.get('isSymbol')
+
+        if isUpper:
+            possible += string.ascii_uppercase
+
+        if isNumber:
+            possible += string.digits
+
+        if isSymbol:
+            possible += string.punctuation
+
+        length = 12  # request.data.get('length')
+
+        password = ''.join(random.sample(possible, length))
+
+        return Response(password, status=status.HTTP_200_OK)
