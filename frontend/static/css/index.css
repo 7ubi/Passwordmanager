@@ -2,7 +2,7 @@
 
 html {
     font-family: 'Montserrat', sans-serif;
-    background: #343434;
+    background: #282828;
     color: white;
 }
 
@@ -10,18 +10,24 @@ html {
     margin-top: 30px;
 }
 
+.iconBtn {
+    padding: 10px;
+    color: #3500D3;
+    border: none;
+    background: transparent;
+}
+
 .btn {
     padding: 10px;
     color: white;
-    border: none;
-    background: transparent;
-    transition: 0.5s;
+    background-color: transparent;
+    border-radius: 5px;
+    border: 1px solid #3500D3;
     font-family: 'Montserrat', sans-serif;
 }
 
-
 .error {
-    color: #ff9090;
+    color: red;
 }
 
 .vertical-center {
@@ -39,9 +45,9 @@ html {
 .password-modal {
     display: flex;
     justify-content: center;
-    background-color: rgba(52, 52, 52, 0.9);
+    background-color: #190061B0;
     border-radius: 10px;
-    border: 1px solid white;
+    border: 1px solid #3500D3;
 }
 
 .top-right {
@@ -49,8 +55,6 @@ html {
     top: 25px;
     right: 25px;
 }
-
-
 
 /**
     Desktop specific
