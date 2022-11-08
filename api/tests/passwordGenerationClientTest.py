@@ -37,9 +37,10 @@ class PasswordGenerationClientTestCase(TestCase):
         # Given
         password = response.content.decode("utf-8")
         password = password[1:len(password) - 1]
+        passwordLen = len(password)
 
         # Then
-        self.assertEqual(len(password), length)
+        self.assertEqual(passwordLen, length)
         self.assertEqual(any([char in password for char in string.ascii_uppercase]), True)
         self.assertEqual(any([char in password for char in string.digits]), True)
-        self.assertEqual(any([char in password for char in '!#$%&()*+,-./:;<=>?@[\]^_`{|}~']), True)
+        self.assertEqual(any([char in password for char in '!#$%&()*+,-./:;<=>?@[]_{}']), True)

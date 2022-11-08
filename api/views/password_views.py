@@ -76,7 +76,7 @@ class GeneratePassword(APIView):
             possible += string.digits
 
         if isSymbol:
-            possible += '!#$%&()*+,-./:;<=>?@[\]^_`{|}~'
+            possible += '!#$%&()*+,-./:;<=>?@[]_{}'
 
         length = int(request.data.get('length'))
 
@@ -92,7 +92,7 @@ class GeneratePassword(APIView):
                 correct = any([char in password for char in string.digits])
 
             if isSymbol and correct:
-                correct = any([char in password for char in '!#$%&()*+,-./:;<=>?@[\]^_`{|}~'])
+                correct = any([char in password for char in '!#$%&()*+,-./:;<=>?@[]_{}'])
 
             if correct:
                 break
