@@ -5,12 +5,17 @@ import FormTextInput from "../generic/FormTextInput";
 import createPostRequest from "../generic/CreatePostRequest";
 import AutoStoriesIcon from '@mui/icons-material/AutoStories';
 import PasswordGeneration from "./PasswordGeneration";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
 const PasswordCreation = ({ closeModal, addPassword }) => {
     const desktop = useMediaQuery('(min-width:600px)');
 
     const [open, setOpen] = useState(false);
     const onOpen = () => setOpen(true);
+
+    const [showPassword, setShowPassword] = useState(true);
+    const toggleShowPassword = () => setShowPassword(!showPassword);
 
     const [title, setTitle] = useState('');
     const [username, setUsername] = useState('');
@@ -92,11 +97,16 @@ const PasswordCreation = ({ closeModal, addPassword }) => {
                         <FormTextInput
                             label="Password"
                             placeHolder="Password..."
-                            inputType="text"
+                            inputType={ showPassword ? "text": "password" }
                             onChange={ (e) => changePassword(e) }
                             divClasses="form-text-padding"
                             labelClasses="form-text-padding"
                         />
+                        {
+                            showPassword ?
+                            <VisibilityIcon className="iconBtn" onClick={ () => toggleShowPassword() } style={{ float: 'right'}} />:
+                            <VisibilityOffIcon className="iconBtn" onClick={ () => toggleShowPassword() } style={{ float: 'right'}} />
+                        }
                         <AutoStoriesIcon className="iconBtn" onClick={ onOpen } style={{float: 'right'}}/>
                     </div>
                 </Grid>
