@@ -80,6 +80,21 @@ class GeneratePassword(APIView):
 
         length = int(request.data.get('length'))
 
-        password = ''.join(random.sample(possible, length))
+        while True:
+            correct = True
+
+            password = ''.join(random.sample(possible, length))
+
+            if isUpper and correct:
+                correct = any([char in password for char in string.ascii_uppercase])
+
+            if isNumber and correct:
+                correct = any([char in password for char in string.digits])
+
+            if isSymbol and correct:
+                correct = any([char in password for char in '!#$%&()*+,-./:;<=>?@[\]^_`{|}~'])
+
+            if correct:
+                break
 
         return Response(password, status=status.HTTP_200_OK)
