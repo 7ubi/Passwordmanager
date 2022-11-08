@@ -62,7 +62,7 @@ class GeneratePassword(APIView):
     authentication_classes = (SessionAuthentication, BasicAuthentication, TokenAuthentication)
     permission_classes = (permissions.IsAuthenticated,)
 
-    def post(self, request):
+    def post(self, request, **kwargs):
         possible = string.ascii_lowercase
 
         isUpper = request.data.get('isUpper')
@@ -76,9 +76,9 @@ class GeneratePassword(APIView):
             possible += string.digits
 
         if isSymbol:
-            possible += string.punctuation
+            possible += '!#$%&()*+,-./:;<=>?@[\]^_`{|}~'
 
-        length = request.data.get('length')
+        length = int(request.data.get('length'))
 
         password = ''.join(random.sample(possible, length))
 
