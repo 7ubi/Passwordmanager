@@ -11,7 +11,6 @@ const PasswordCreation = ({ closeModal, addPassword }) => {
 
     const [open, setOpen] = useState(false);
     const onOpen = () => setOpen(true);
-    const onClose = () => setOpen(false);
 
     const [title, setTitle] = useState('');
     const [username, setUsername] = useState('');
@@ -62,6 +61,11 @@ const PasswordCreation = ({ closeModal, addPassword }) => {
         closeModal();
     }
 
+    const inputPasswordGenerated = (password) => {
+        document.getElementById('Password').value = password;
+        setPassword(password);
+    }
+
     return (
         <form onSubmit={ onSubmit }>
             <Grid container spacing={2}>
@@ -108,13 +112,7 @@ const PasswordCreation = ({ closeModal, addPassword }) => {
                 </Grid>
             </Grid>
 
-            <Modal
-                open={ open }
-                onClose={ onClose }
-                className="password-modal"
-            >
-                <PasswordGeneration closeModal={ () => onClose() } />
-            </Modal>
+            <PasswordGeneration open={ open } setOpen={ (val) => setOpen(val) } writePassword={ (password) => { inputPasswordGenerated(password) } } />
         </form>
     );
 }
