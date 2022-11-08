@@ -99,11 +99,7 @@ const PasswordStorage = ({  }) => {
                                 <StyledTableCell align="center">{password.username}</StyledTableCell>
                                 <StyledTableCell align="center">{password.website}</StyledTableCell>
                                 <StyledTableCell align="center" style={{width: '20%'}}>
-                                    <div style={{
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        justifyContent: 'center',
-                                    }}>
+                                    <div className="center">
                                         {
                                             password.showPassword ?
                                             <span>{password.managed_password}</span>:

@@ -1,11 +1,21 @@
 import React, {useState} from "react";
-import {Grid, useMediaQuery} from "@mui/material";
+import {Grid, Modal, useMediaQuery} from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 import FormTextInput from "../generic/FormTextInput";
 import createPostRequest from "../generic/CreatePostRequest";
+import AutoStoriesIcon from '@mui/icons-material/AutoStories';
+import PasswordGeneration from "./PasswordGeneration";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
 const PasswordCreation = ({ closeModal, addPassword }) => {
     const desktop = useMediaQuery('(min-width:600px)');
+
+    const [open, setOpen] = useState(false);
+    const onOpen = () => setOpen(true);
+
+    const [showPassword, setShowPassword] = useState(true);
+    const toggleShowPassword = () => setShowPassword(!showPassword);
 
     const [title, setTitle] = useState('');
     const [username, setUsername] = useState('');
@@ -56,28 +66,54 @@ const PasswordCreation = ({ closeModal, addPassword }) => {
         closeModal();
     }
 
+    const inputPasswordGenerated = (password) => {
+        document.getElementById('Password').value = password;
+        setPassword(password);
+    }
+
     return (
         <form onSubmit={ onSubmit }>
-            <Grid container spacing={1}>
+            <Grid container spacing={2}>
                 <Grid item xs={12} align="center">
-                    <h1>
-                        Create Login
-                    </h1>
+                    <div className="center">
+                        <h1>
+                            Create Login
+                        </h1>
+                    </div>
                     <CloseIcon onClick={ closeModal } className="top-right" />
                 </Grid>
-                <Grid container spacing={desktop ? 2: 1}>
-                    <Grid item xs={desktop ? 6: 12} align="center">
+                <Grid item xs={12} align="center">
+                    <div className="center" style={{padding: "10px"}}>
                         <FormTextInput label="Title" placeHolder="Title..." inputType="text" onChange={ (e) => changeTitle(e) } divClasses="form-text-padding" labelClasses="form-text-padding" />
-                    </Grid>
-                    <Grid item xs={desktop ? 6: 12} align="center">
+                    </div>
+                </Grid>
+                <Grid item xs={12} align="center">
+                    <div className="center" style={{padding: "10px"}}>
                         <FormTextInput label="Username" placeHolder="Username..." inputType="text" onChange={ (e) => changeUsername(e) }  divClasses="form-text-padding" labelClasses="form-text-padding"/>
-                    </Grid>
-                    <Grid item xs={desktop ? 6: 12} align="center">
-                        <FormTextInput label="Password" placeHolder="Password..." inputType="text" onChange={ (e) => changePassword(e) }  divClasses="form-text-padding" labelClasses="form-text-padding"/>
-                    </Grid>
-                    <Grid item xs={desktop ? 6: 12} align="center">
+                    </div>
+                </Grid>
+                <Grid item xs={12} align="center">
+                    <div className="center" style={{padding: "10px"}}>
+                        <FormTextInput
+                            label="Password"
+                            placeHolder="Password..."
+                            inputType={ showPassword ? "text": "password" }
+                            onChange={ (e) => changePassword(e) }
+                            divClasses="form-text-padding"
+                            labelClasses="form-text-padding"
+                        />
+                        {
+                            showPassword ?
+                            <VisibilityIcon className="iconBtn" onClick={ () => toggleShowPassword() } style={{ float: 'right'}} />:
+                            <VisibilityOffIcon className="iconBtn" onClick={ () => toggleShowPassword() } style={{ float: 'right'}} />
+                        }
+                        <AutoStoriesIcon className="iconBtn" onClick={ onOpen } style={{float: 'right'}}/>
+                    </div>
+                </Grid>
+                <Grid item xs={12} align="center">
+                    <div className="center" style={{padding: "10px"}}>
                         <FormTextInput label="Website" placeHolder="Website..." inputType="text" onChange={ (e) => changeWebsite(e) }  divClasses="form-text-padding" labelClasses="form-text-padding"/>
-                    </Grid>
+                    </div>
                 </Grid>
                 <Grid item xs={12} align="center">
                     <button className="btn">
@@ -85,6 +121,8 @@ const PasswordCreation = ({ closeModal, addPassword }) => {
                     </button>
                 </Grid>
             </Grid>
+
+            <PasswordGeneration open={ open } setOpen={ (val) => setOpen(val) } writePassword={ (password) => { inputPasswordGenerated(password) } } />
         </form>
     );
 }
