@@ -16,6 +16,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import AddCircleOutline from '@mui/icons-material/AddCircleOutline';
+import DeleteIcon from '@mui/icons-material/Delete';
 import PasswordCreation from "./PasswordCreation";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -72,7 +73,7 @@ const PasswordStorage = ({  }) => {
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
                     <TableHead>
                         <TableRow>
-                            <StyledTableCell align="center" colSpan={3}>
+                            <StyledTableCell align="center" colSpan={4}>
                                 <h1>Password storage</h1>
                             </StyledTableCell>
                             <StyledTableCell align="center" colSpan={1}>
@@ -87,7 +88,7 @@ const PasswordStorage = ({  }) => {
                             <StyledTableCell align="center">Username</StyledTableCell>
                             <StyledTableCell align="center">Website</StyledTableCell>
                             <StyledTableCell align="center">Password</StyledTableCell>
-                            <StyledTableCell align="center" />
+                            <StyledTableCell align="center" colSpan={2} />
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -118,6 +119,9 @@ const PasswordStorage = ({  }) => {
                                         <VisibilityIcon className="iconBtn" onClick={ () => togglePasswordShown(password) } style={{ float: 'right'}} />:
                                         <VisibilityOffIcon className="iconBtn" onClick={ () => togglePasswordShown(password) } style={{ float: 'right'}} />
                                     }
+                                </StyledTableCell>
+                                <StyledTableCell align="center" style={{width: '5%'}}>
+                                    <DeleteIcon />
                                 </StyledTableCell>
                             </TableRow>
                         ))}
