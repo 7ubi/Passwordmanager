@@ -18,6 +18,7 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import AddCircleOutline from '@mui/icons-material/AddCircleOutline';
 import DeleteIcon from '@mui/icons-material/Delete';
 import PasswordCreation from "./PasswordCreation";
+import createPostRequest from "../generic/CreatePostRequest";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -40,12 +41,24 @@ const PasswordStorage = ({  }) => {
     const [passwords, setPasswords] = useState([]);
 
     const fetchPasswordsUser = async () => {
-        const response = await fetch("/api/passwordUser");
+        const response = await fetch('/api/passwordUser');
         const data = await response.json();
         data.map(password => {
             password.showPassword = false;
             setPasswords(passwords => [...passwords, password]);
         })
+    }
+
+    const deletePassword = async (passwordId) => {
+        await fetch('api/deletePassword', createPostRequest({
+            id: passwordId
+        })).then(
+            () => {
+                setPasswords([]);
+                fetchPasswordsUser();
+            }
+        );
+        //;
     }
 
     const togglePasswordShown = (password) => {
@@ -87,8 +100,8 @@ const PasswordStorage = ({  }) => {
                             <StyledTableCell align="center">Title</StyledTableCell>
                             <StyledTableCell align="center">Username</StyledTableCell>
                             <StyledTableCell align="center">Website</StyledTableCell>
-                            <StyledTableCell align="center">Password</StyledTableCell>
-                            <StyledTableCell align="center" colSpan={2} />
+                            <StyledTableCell align="center" colSpan={2}>Password</StyledTableCell>
+                            <StyledTableCell align="center"/>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -121,7 +134,7 @@ const PasswordStorage = ({  }) => {
                                     }
                                 </StyledTableCell>
                                 <StyledTableCell align="center" style={{width: '5%'}}>
-                                    <DeleteIcon />
+                                    <DeleteIcon onClick={() => deletePassword(password.id)} />
                                 </StyledTableCell>
                             </TableRow>
                         ))}

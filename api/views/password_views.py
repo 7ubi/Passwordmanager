@@ -20,7 +20,7 @@ class GetManagedPasswordUser(APIView):
     def get(self, request):
         managed_passwords_user = ManagedPassword.objects.filter(creator=request.user)
 
-        return Response(list(managed_passwords_user.values('username', 'title', 'website', 'managed_password'))
+        return Response(list(managed_passwords_user.values('id', 'username', 'title', 'website', 'managed_password'))
                         , status=status.HTTP_302_FOUND)
 
 
@@ -58,7 +58,21 @@ class CreatePasswordView(APIView):
         return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
-class GeneratePassword(APIView):
+class DeletePasswordView(APIView):
+    authentication_classes = (SessionAuthentication, BasicAuthentication, TokenAuthentication)
+    permission_classes = (permissions.IsAuthenticated,)
+
+    def post(self, request, **kwargs):
+        passwordId = request.data.get('id')
+        password = ManagedPassword.objects.filter(id=passwordId)
+        if password.exists():
+            password.delete()
+            return Response(status=status.HTTP_200_OK)
+        else:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+
+class GeneratePasswordView(APIView):
     authentication_classes = (SessionAuthentication, BasicAuthentication, TokenAuthentication)
     permission_classes = (permissions.IsAuthenticated,)
 

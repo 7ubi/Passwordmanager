@@ -67,3 +67,44 @@ class ManagedPasswordClientTestCase(TestCase):
         self.assertEqual(managedPassword.username, newManagedPassword['username'])
         self.assertEqual(managedPassword.managed_password, newManagedPassword['managed_password'])
         self.assertEqual(managedPassword.website, newManagedPassword['website'])
+
+    def test_delete_password(self):
+        cache.clear()
+
+        # Given
+        lengthBefore = len(ManagedPassword.objects.filter(creator=self.user))
+
+        # When
+        self.client.login(username='max', password='maxmustermann')
+        passwordId = {
+            'id': ManagedPassword.objects.get(creator=self.user).id
+        }
+        response = self.client.post('/api/deletePassword', passwordId)
+
+        # Then
+        self.assertEqual(response.status_code, 200)
+
+        # Then
+        lengthAfter = len(ManagedPassword.objects.filter(creator=self.user))
+        self.assertEqual(lengthBefore - 1, lengthAfter)
+
+    def test_not_delete_password(self):
+        cache.clear()
+
+        # Given
+        lengthBefore = len(ManagedPassword.objects.filter(creator=self.user))
+
+        # When
+        self.client.login(username='max', password='maxmustermann')
+        passwordId = {
+            'id': ManagedPassword.objects.get(creator=self.user).id + 1
+        }
+        response = self.client.post('/api/deletePassword', passwordId)
+
+        # Then
+        self.assertEqual(response.status_code, 404)
+
+        # Then
+        lengthAfter = len(ManagedPassword.objects.filter(creator=self.user))
+        self.assertEqual(lengthBefore, lengthAfter)
+

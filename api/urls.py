@@ -7,7 +7,8 @@ urlpatterns = [
     path('password/', PasswordView.as_view()),
     path('passwordUser', GetManagedPasswordUser.as_view()),
     path('createPassword', CreatePasswordView.as_view()),
-    path('generatePassword', GeneratePassword.as_view()),
+    path('generatePassword', GeneratePasswordView.as_view()),
+    path('deletePassword', DeletePasswordView.as_view()),
 
     # User views
     path('checkUsername/', UsernameExistsView),
