@@ -17,6 +17,7 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import AddCircleOutline from '@mui/icons-material/AddCircleOutline';
 import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 import PasswordCreation from "./PasswordCreation";
 import createPostRequest from "../generic/CreatePostRequest";
 
@@ -86,7 +87,7 @@ const PasswordStorage = ({  }) => {
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
                     <TableHead>
                         <TableRow>
-                            <StyledTableCell align="center" colSpan={4}>
+                            <StyledTableCell align="center" colSpan={5}>
                                 <h1>Password storage</h1>
                             </StyledTableCell>
                             <StyledTableCell align="center" colSpan={1}>
@@ -100,8 +101,8 @@ const PasswordStorage = ({  }) => {
                             <StyledTableCell align="center">Title</StyledTableCell>
                             <StyledTableCell align="center">Username</StyledTableCell>
                             <StyledTableCell align="center">Website</StyledTableCell>
-                            <StyledTableCell align="center" colSpan={2}>Password</StyledTableCell>
-                            <StyledTableCell align="center"/>
+                            <StyledTableCell align="center">Password</StyledTableCell>
+                            <StyledTableCell align="center" colspan={3}/>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -134,7 +135,10 @@ const PasswordStorage = ({  }) => {
                                     }
                                 </StyledTableCell>
                                 <StyledTableCell align="center" style={{width: '5%'}}>
-                                    <DeleteIcon onClick={() => deletePassword(password.id)} />
+                                    <EditIcon className="iconBtn" onClick={() => {}} />
+                                </StyledTableCell>
+                                <StyledTableCell align="center" style={{width: '5%'}}>
+                                    <DeleteIcon className="iconBtn" onClick={() => deletePassword(password.id)} />
                                 </StyledTableCell>
                             </TableRow>
                         ))}
