@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Grid, Modal, useMediaQuery} from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 import FormTextInput from "../generic/FormTextInput";
@@ -8,9 +8,13 @@ import PasswordGeneration from "./PasswordGeneration";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
-const PasswordCreation = ({ closeModal, addPassword }) => {
-    const desktop = useMediaQuery('(min-width:600px)');
-
+const PasswordCreation = ({
+    closeModal,
+    editPassword,
+    passwordToEdit,
+    addPassword,
+    creation=true,
+}) => {
     const [open, setOpen] = useState(false);
     const onOpen = () => setOpen(true);
 
@@ -71,13 +75,31 @@ const PasswordCreation = ({ closeModal, addPassword }) => {
         setPassword(password);
     }
 
+    useEffect(() => {
+        if(!creation) {
+            document.getElementById('Title').value = passwordToEdit.title;
+            document.getElementById('Username').value = passwordToEdit.username;
+            document.getElementById('Password').value = passwordToEdit.managed_password;
+            document.getElementById('Website').value = passwordToEdit.website;
+
+            setTitle(passwordToEdit.title);
+            setUsername(passwordToEdit.username);
+            setPassword(passwordToEdit.managed_password);
+            setWebsite(passwordToEdit.website);
+        }
+    }, []);
+
     return (
         <form onSubmit={ onSubmit }>
             <Grid container spacing={2}>
                 <Grid item xs={12} align="center">
                     <div className="center">
                         <h1>
-                            Create Login
+                            {
+                                creation ?
+                                "Create Password":
+                                "Edit Password"
+                            }
                         </h1>
                     </div>
                     <CloseIcon onClick={ closeModal } className="top-right" />

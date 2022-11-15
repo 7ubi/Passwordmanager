@@ -35,9 +35,14 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 
 
 const PasswordStorage = ({  }) => {
-    const [open, setOpen] = useState(false);
-    const onOpen = () => setOpen(true);
-    const onClose = () => setOpen(false);
+    const [openCreation, setOpenCreation] = useState(false);
+    const onOpenCreation = () => setOpenCreation(true);
+    const onCloseCreation = () => setOpenCreation(false);
+
+    const [openEdit, setOpenEdit] = useState(false);
+    const onOpenEdit = () => setOpenEdit(true);
+    const onCloseEdit = () => setOpenEdit(false);
+    const [passwordToEdit, setPasswordToEdit] = useState();
 
     const [passwords, setPasswords] = useState([]);
 
@@ -91,7 +96,7 @@ const PasswordStorage = ({  }) => {
                                 <h1>Password storage</h1>
                             </StyledTableCell>
                             <StyledTableCell align="center" colSpan={1}>
-                                <AddCircleOutline className="iconBtn" onClick={ onOpen } />
+                                <AddCircleOutline className="iconBtn" onClick={ onOpenCreation } />
                             </StyledTableCell>
                             <StyledTableCell align="center" colSpan={1}>
                                 <LogoutIcon className="iconBtn" onClick={ logout }/>
@@ -135,7 +140,14 @@ const PasswordStorage = ({  }) => {
                                     }
                                 </StyledTableCell>
                                 <StyledTableCell align="center" style={{width: '5%'}}>
-                                    <EditIcon className="iconBtn" onClick={() => {}} />
+                                    <EditIcon
+                                        className="iconBtn"
+                                        onClick={() => {
+                                            console.log(password)
+                                            setPasswordToEdit(password);
+                                            onOpenEdit();
+                                        }}
+                                    />
                                 </StyledTableCell>
                                 <StyledTableCell align="center" style={{width: '5%'}}>
                                     <DeleteIcon className="iconBtn" onClick={() => deletePassword(password.id)} />
@@ -146,11 +158,25 @@ const PasswordStorage = ({  }) => {
                 </Table>
             </TableContainer>
             <Modal
-                open={ open }
-                onClose={ onClose }
+                open={ openCreation }
+                onClose={ onCloseCreation }
                 className="password-modal"
             >
-                <PasswordCreation closeModal={ () => onClose() } addPassword={ (password) => addPassword(password) }/>
+                <PasswordCreation
+                    closeModal={ () => onCloseCreation() }
+                    addPassword={ (password) => addPassword(password) }
+                />
+            </Modal>
+            <Modal
+                open={ openEdit }
+                onClose={ onCloseEdit }
+                className="password-modal"
+            >
+                <PasswordCreation
+                    closeModal={ () => onCloseEdit() }
+                    creation={ false }
+                    passwordToEdit={ passwordToEdit }
+                />
             </Modal>
         </Grid>
     )
