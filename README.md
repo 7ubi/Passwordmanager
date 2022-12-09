@@ -59,3 +59,10 @@ cd frontend
 ```
 npm run dev
 ```
+
+## Running it on Docker
+
+1. ```docker build --file=frontend.dockerfile -t password-web-frontend .```
+2. ```docker build --file=backend.dockerfile -t password-web-backend .```
+3. ```docker-compose -f docker-compose.yml up```
+4. Check localhost:8000
