@@ -1,0 +1,14 @@
+version: '1'
+services:
+  web-frontend:
+    image: password-web-frontend:latest
+    environment:
+      PORT: 3000
+      PROXY_API: http://localhost:8000/
+    ports:
+      - 3000:3000
+      
+  web-backend:
+    image: password-web-backend:latest
+    ports:
+      - 8000:8000
