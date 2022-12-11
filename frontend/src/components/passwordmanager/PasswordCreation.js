@@ -53,7 +53,7 @@ const PasswordCreation = ({ closeModal, addPassword }) => {
     const onSubmit = (e) => {
         e.preventDefault();
 
-        fetch('/api/createPassword', createPostRequest({
+        fetch('/api/createPassword/', createPostRequest({
                 title: title,
                 username: username,
                 managed_password: password,

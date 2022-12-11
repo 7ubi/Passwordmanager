@@ -41,7 +41,7 @@ const PasswordStorage = ({  }) => {
     const [passwords, setPasswords] = useState([]);
 
     const fetchPasswordsUser = async () => {
-        const response = await fetch('/api/passwordUser');
+        const response = await fetch('/api/passwordUser/');
         const data = await response.json();
         data.map(password => {
             password.showPassword = false;
@@ -50,7 +50,7 @@ const PasswordStorage = ({  }) => {
     }
 
     const deletePassword = async (passwordId) => {
-        await fetch('api/deletePassword', createPostRequest({
+        await fetch('/api/deletePassword/', createPostRequest({
             id: passwordId
         })).then(
             () => {
@@ -58,7 +58,6 @@ const PasswordStorage = ({  }) => {
                 fetchPasswordsUser();
             }
         );
-        //;
     }
 
     const togglePasswordShown = (password) => {

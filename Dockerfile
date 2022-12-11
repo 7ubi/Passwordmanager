@@ -10,11 +10,11 @@ ENV PYTHONUNBUFFERED 1
 
 # install dependencies
 RUN pip install --upgrade pip 
-COPY ./requirements.txt /app
+COPY requirements.txt /app
 RUN pip install -r requirements.txt
 
 # copy project
-COPY . /app
+COPY . .
 
 RUN python createPassword.py
 RUN python manage.py makemigrations

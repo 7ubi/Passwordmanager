@@ -132,3 +132,4 @@ REST_FRAMEWORK = {
     ),
 }
 
+APPEND_SLASH = True

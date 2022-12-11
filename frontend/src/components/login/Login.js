@@ -19,7 +19,7 @@ const Login = ({  }) => {
     const onSubmit = (e) => {
         e.preventDefault();
 
-        fetch('/api/loginUser', createPostRequest({
+        fetch('/api/loginUser/', createPostRequest({
             username: username,
             password: password
         }))
