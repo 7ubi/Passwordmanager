@@ -11,9 +11,10 @@ urlpatterns = [
     path('deletePassword/', DeletePasswordView.as_view()),
 
     # User views
+    path('checkUsername', UsernameExistsView),
     path('checkUsername/', UsernameExistsView),
-    path('createUser/', CreateUserView.as_view()),
+    path('createUser', CreateUserView.as_view()),
     path('loginUser/', LoginUserView),
-    path('loginUser/', LoginUserView),
+    path('loginUser', LoginUserView),
     path('logout/', logoutView),
 ]
