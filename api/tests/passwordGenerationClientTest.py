@@ -29,7 +29,7 @@ class PasswordGenerationClientTestCase(TestCase):
         }
 
         # When
-        response = self.client.post('/api/generatePassword', request)
+        response = self.client.post('/api/generatePassword/', request)
 
         # Then
         self.assertEqual(response.status_code, 200)

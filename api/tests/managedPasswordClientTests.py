@@ -26,7 +26,7 @@ class ManagedPasswordClientTestCase(TestCase):
         cache.clear()
         # When
         self.client.login(username='max', password='maxmustermann')
-        response = self.client.get('/api/passwordUser')
+        response = self.client.get('/api/passwordUser/')
 
         # Then
         self.assertEqual(response.status_code, 302)
@@ -54,7 +54,7 @@ class ManagedPasswordClientTestCase(TestCase):
         }
 
         # When
-        response = self.client.post('/api/createPassword', newManagedPassword)
+        response = self.client.post('/api/createPassword/', newManagedPassword)
 
         # Then
         self.assertEqual(response.status_code, 201)
@@ -79,7 +79,7 @@ class ManagedPasswordClientTestCase(TestCase):
         passwordId = {
             'id': ManagedPassword.objects.get(creator=self.user).id
         }
-        response = self.client.post('/api/deletePassword', passwordId)
+        response = self.client.post('/api/deletePassword/', passwordId)
 
         # Then
         self.assertEqual(response.status_code, 200)
@@ -99,7 +99,7 @@ class ManagedPasswordClientTestCase(TestCase):
         passwordId = {
             'id': ManagedPassword.objects.get(creator=self.user).id + 1
         }
-        response = self.client.post('/api/deletePassword', passwordId)
+        response = self.client.post('/api/deletePassword/', passwordId)
 
         # Then
         self.assertEqual(response.status_code, 404)
