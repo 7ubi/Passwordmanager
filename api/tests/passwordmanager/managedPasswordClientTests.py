@@ -1,27 +1,9 @@
-from django.test import TestCase
-from django.contrib.auth.models import User
 from api.models import ManagedPassword
 from django.core.cache import cache
-from rest_framework.test import APIClient
+from .config.passwordmanagerConfig import PasswordmanagerConfig
 
 
-class ManagedPasswordClientTestCase(TestCase):
-    def setUp(self):
-        # Given
-        self.client = APIClient()
-
-        # Given
-        self.user = User.objects.create_user('max', 'max@mustermann.com', 'maxmustermann')
-
-        # Given
-        ManagedPassword.objects.create(
-            creator=self.user,
-            title='title',
-            managed_password='passwordmanager',
-            username='username',
-            website='website'
-        )
-
+class ManagedPasswordClientTestCase(PasswordmanagerConfig):
     def test_get_password_user(self):
         cache.clear()
         # When
@@ -36,7 +18,7 @@ class ManagedPasswordClientTestCase(TestCase):
 
         # Then
         self.assertEqual(managedPassword['title'], 'title')
-        self.assertEqual(managedPassword['managed_password'], 'passwordmanager')
+        self.assertEqual(managedPassword['managed_password'], 'password')
         self.assertEqual(managedPassword['username'], 'username')
         self.assertEqual(managedPassword['website'], 'website')
 
