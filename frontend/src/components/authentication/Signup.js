@@ -66,7 +66,7 @@ const Signup = ({  }) => {
         }))
             .then((response) => {
                 if(response.status === 201){
-                    location.href = "/login";
+                    location.href = "/authentication";
                 }
             });
     }

@@ -6,8 +6,8 @@ import {
   Route,
 } from "react-router-dom";
 
-import Login from './login/Login';
-import Signup from "./login/Signup";
+import Login from './authentication/Login';
+import Signup from "./authentication/Signup";
 import PasswordStorage from "./passwordmanager/PasswordStorage";
 
 

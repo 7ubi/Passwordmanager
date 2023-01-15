@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 
 
 # Create your views here.
-@login_required(login_url='/login')
+@login_required(login_url='/authentication')
 def indexLoginRequired(request):
     return render(request, 'frontend/index.html')
 
