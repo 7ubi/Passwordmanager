@@ -19,3 +19,9 @@ class CreatePasswordSerializer(serializers.ModelSerializer):
     class Meta:
         model = ManagedPassword
         fields = ('website', 'title', 'username', 'managed_password')
+
+
+class EditPasswordSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ManagedPassword
+        fields = ('id', 'website', 'title', 'username', 'managed_password')

@@ -4,6 +4,7 @@ html {
     font-family: 'Montserrat', sans-serif;
     background: #282828;
     color: white;
+    font-size: large;
 }
 
 .formGrid {
@@ -11,7 +12,7 @@ html {
 }
 
 .iconBtn {
-    padding: 10px;
+    padding: 5px;
     color: white;
     border: none;
     background: transparent;

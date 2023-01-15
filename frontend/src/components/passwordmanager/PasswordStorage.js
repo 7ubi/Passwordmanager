@@ -11,12 +11,12 @@ import {
     TableHead,
     TableRow
 } from "@mui/material";
-import CircleIcon from '@mui/icons-material/Circle';
 import LogoutIcon from '@mui/icons-material/Logout';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import AddCircleOutline from '@mui/icons-material/AddCircleOutline';
 import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 import PasswordCreation from "./PasswordCreation";
 import createPostRequest from "../generic/CreatePostRequest";
 
@@ -34,9 +34,14 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 
 
 const PasswordStorage = ({  }) => {
-    const [open, setOpen] = useState(false);
-    const onOpen = () => setOpen(true);
-    const onClose = () => setOpen(false);
+    const [openCreation, setOpenCreation] = useState(false);
+    const onOpenCreation = () => setOpenCreation(true);
+    const onCloseCreation = () => setOpenCreation(false);
+
+    const [openEdit, setOpenEdit] = useState(false);
+    const onOpenEdit = () => setOpenEdit(true);
+    const onCloseEdit = () => setOpenEdit(false);
+    const [passwordToEdit, setPasswordToEdit] = useState();
 
     const [passwords, setPasswords] = useState([]);
 
@@ -70,6 +75,17 @@ const PasswordStorage = ({  }) => {
         setPasswords(passwords => [...passwords, password])
     }
 
+    const editPassword = (password) => {
+        let editedPassword = passwords.find(element => element.id === password.id);
+
+        editedPassword.title = password.title;
+        editedPassword.username = password.username;
+        editedPassword.managed_password = password.managed_password;
+        editedPassword.website = password.website;
+
+        setPasswords(passwords => [...passwords]);
+    }
+
     const logout = async () => {
         const response = await fetch("/api/logout");
         location.href = "/login";
@@ -85,11 +101,11 @@ const PasswordStorage = ({  }) => {
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
                     <TableHead>
                         <TableRow>
-                            <StyledTableCell align="center" colSpan={4}>
+                            <StyledTableCell align="center" colSpan={5}>
                                 <h1>Password storage</h1>
                             </StyledTableCell>
                             <StyledTableCell align="center" colSpan={1}>
-                                <AddCircleOutline className="iconBtn" onClick={ onOpen } />
+                                <AddCircleOutline className="iconBtn" onClick={ onOpenCreation } />
                             </StyledTableCell>
                             <StyledTableCell align="center" colSpan={1}>
                                 <LogoutIcon className="iconBtn" onClick={ logout }/>
@@ -99,8 +115,8 @@ const PasswordStorage = ({  }) => {
                             <StyledTableCell align="center">Title</StyledTableCell>
                             <StyledTableCell align="center">Username</StyledTableCell>
                             <StyledTableCell align="center">Website</StyledTableCell>
-                            <StyledTableCell align="center" colSpan={2}>Password</StyledTableCell>
-                            <StyledTableCell align="center"/>
+                            <StyledTableCell align="center">Password</StyledTableCell>
+                            <StyledTableCell align="center" colspan={3}/>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -117,10 +133,7 @@ const PasswordStorage = ({  }) => {
                                             password.showPassword ?
                                             <span>{password.managed_password}</span>:
                                             <span>
-                                                <CircleIcon className="iconBtn" style={{ fontSize: 'small', padding: 0}} />
-                                                <CircleIcon className="iconBtn" style={{ fontSize: 'small', padding: 0}} />
-                                                <CircleIcon className="iconBtn" style={{ fontSize: 'small', padding: 0}} />
-                                                <CircleIcon className="iconBtn" style={{ fontSize: 'small', padding: 0}} />
+                                                • • • • •
                                             </span>
                                         }
                                     </div>
@@ -133,7 +146,16 @@ const PasswordStorage = ({  }) => {
                                     }
                                 </StyledTableCell>
                                 <StyledTableCell align="center" style={{width: '5%'}}>
-                                    <DeleteIcon onClick={() => deletePassword(password.id)} />
+                                    <EditIcon
+                                        className="iconBtn"
+                                        onClick={() => {
+                                            setPasswordToEdit(password);
+                                            onOpenEdit();
+                                        }}
+                                    />
+                                </StyledTableCell>
+                                <StyledTableCell align="center" style={{width: '5%'}}>
+                                    <DeleteIcon className="iconBtn" onClick={() => deletePassword(password.id)} />
                                 </StyledTableCell>
                             </TableRow>
                         ))}
@@ -141,11 +163,26 @@ const PasswordStorage = ({  }) => {
                 </Table>
             </TableContainer>
             <Modal
-                open={ open }
-                onClose={ onClose }
+                open={ openCreation }
+                onClose={ onCloseCreation }
                 className="password-modal"
             >
-                <PasswordCreation closeModal={ () => onClose() } addPassword={ (password) => addPassword(password) }/>
+                <PasswordCreation
+                    closeModal={ () => onCloseCreation() }
+                    addPassword={ (password) => addPassword(password) }
+                />
+            </Modal>
+            <Modal
+                open={ openEdit }
+                onClose={ onCloseEdit }
+                className="password-modal"
+            >
+                <PasswordCreation
+                    closeModal={ () => onCloseEdit() }
+                    creation={ false }
+                    addPassword={ (password) => editPassword(password) }
+                    passwordToEdit={ passwordToEdit }
+                />
             </Modal>
         </Grid>
     )
