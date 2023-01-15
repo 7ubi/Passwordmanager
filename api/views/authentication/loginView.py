@@ -24,4 +24,4 @@ def LoginUserView(request):
 
 def logoutView(request):
     logout(request)
-    return redirect('/authentication')
+    return redirect('/login')

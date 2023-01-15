@@ -88,7 +88,7 @@ const PasswordStorage = ({  }) => {
 
     const logout = async () => {
         const response = await fetch("/api/logout");
-        location.href = "/authentication";
+        location.href = "/login";
     }
 
     useEffect(() => {

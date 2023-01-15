@@ -12,7 +12,7 @@ class ManagedPasswordTestCase(TestCase):
         ManagedPassword.objects.create(
             creator=self.user,
             title='title',
-            managed_password='password',
+            managed_password='passwordmanager',
             username='username',
             website='website'
         )
@@ -23,6 +23,6 @@ class ManagedPasswordTestCase(TestCase):
 
         # Then
         self.assertEqual(managedPassword.title, 'title')
-        self.assertEqual(managedPassword.managed_password, 'password')
+        self.assertEqual(managedPassword.managed_password, 'passwordmanager')
         self.assertEqual(managedPassword.username, 'username')
         self.assertEqual(managedPassword.website, 'website')

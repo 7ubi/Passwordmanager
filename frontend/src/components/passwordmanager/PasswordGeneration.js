@@ -63,7 +63,7 @@ const PasswordCreation = ({ open, setOpen, writePassword }) => {
     const onSubmit = (e) => {
         e.preventDefault();
 
-        // insert password in password creation
+        // insert passwordmanager in passwordmanager creation
     }
 
     useEffect(() => {
