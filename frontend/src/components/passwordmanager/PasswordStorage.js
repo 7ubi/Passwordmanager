@@ -11,7 +11,6 @@ import {
     TableHead,
     TableRow
 } from "@mui/material";
-import CircleIcon from '@mui/icons-material/Circle';
 import LogoutIcon from '@mui/icons-material/Logout';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import VisibilityIcon from '@mui/icons-material/Visibility';
@@ -76,6 +75,17 @@ const PasswordStorage = ({  }) => {
         setPasswords(passwords => [...passwords, password])
     }
 
+    const editPassword = (password) => {
+        let editedPassword = passwords.find(element => element.id === password.id);
+
+        editedPassword.title = password.title;
+        editedPassword.username = password.username;
+        editedPassword.managed_password = password.managed_password;
+        editedPassword.website = password.website;
+
+        setPasswords(passwords => [...passwords]);
+    }
+
     const logout = async () => {
         const response = await fetch("/api/logout");
         location.href = "/login";
@@ -123,10 +133,7 @@ const PasswordStorage = ({  }) => {
                                             password.showPassword ?
                                             <span>{password.managed_password}</span>:
                                             <span>
-                                                <CircleIcon className="iconBtn" style={{ fontSize: 'small', padding: 0}} />
-                                                <CircleIcon className="iconBtn" style={{ fontSize: 'small', padding: 0}} />
-                                                <CircleIcon className="iconBtn" style={{ fontSize: 'small', padding: 0}} />
-                                                <CircleIcon className="iconBtn" style={{ fontSize: 'small', padding: 0}} />
+                                                • • • • •
                                             </span>
                                         }
                                     </div>
@@ -142,7 +149,6 @@ const PasswordStorage = ({  }) => {
                                     <EditIcon
                                         className="iconBtn"
                                         onClick={() => {
-                                            console.log(password)
                                             setPasswordToEdit(password);
                                             onOpenEdit();
                                         }}
@@ -174,6 +180,7 @@ const PasswordStorage = ({  }) => {
                 <PasswordCreation
                     closeModal={ () => onCloseEdit() }
                     creation={ false }
+                    addPassword={ (password) => editPassword(password) }
                     passwordToEdit={ passwordToEdit }
                 />
             </Modal>

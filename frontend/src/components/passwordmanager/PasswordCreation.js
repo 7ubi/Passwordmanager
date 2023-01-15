@@ -10,7 +10,6 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
 const PasswordCreation = ({
     closeModal,
-    editPassword,
     passwordToEdit,
     addPassword,
     creation=true,
@@ -54,7 +53,7 @@ const PasswordCreation = ({
         setWebsite("");
     }
 
-    const onSubmit = (e) => {
+    const onSubmitCreate = (e) => {
         e.preventDefault();
 
         fetch('/api/createPassword/', createPostRequest({
@@ -65,6 +64,26 @@ const PasswordCreation = ({
             }))
             .then((response) => response.json())
             .then((data) => addPassword(data));
+
+        clearInput();
+        closeModal();
+    }
+
+    const onSubmitEdit = (e) => {
+        e.preventDefault();
+
+        fetch('/api/editPassword/', createPostRequest({
+                id: passwordToEdit.id,
+                title: title,
+                username: username,
+                managed_password: password,
+                website: website
+            }))
+            .then((response) => response.json())
+            .then((data) => {
+                data.id = passwordToEdit.id;
+                addPassword(data)
+            });
 
         clearInput();
         closeModal();
@@ -90,7 +109,7 @@ const PasswordCreation = ({
     }, []);
 
     return (
-        <form onSubmit={ onSubmit }>
+        <form onSubmit={ creation ? onSubmitCreate: onSubmitEdit }>
             <Grid container spacing={2}>
                 <Grid item xs={12} align="center">
                     <div className="center">
