@@ -32,7 +32,7 @@ const Signup = ({  }) => {
     }
 
     const checkUsername = (val) => {
-        fetch('/api/checkUsername', createPostRequest({
+        fetch('/api/checkUsername/', createPostRequest({
             username: val
         }))
             .then(async (response) => {
@@ -59,7 +59,7 @@ const Signup = ({  }) => {
         if(usernameExits || !isPasswordMatch())
             return;
 
-        fetch('/api/createUser', createPostRequest({
+        fetch('/api/createUser/', createPostRequest({
             username: username,
             email: email,
             password: password

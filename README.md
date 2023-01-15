@@ -59,3 +59,15 @@ cd frontend
 ```
 npm run dev
 ```
+
+## Running it on Docker
+
+### Starting Docker
+```
+docker-compose up --build -d
+```
+
+### Stopping Docker
+```
+docker-compose down
+```

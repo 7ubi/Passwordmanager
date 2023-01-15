@@ -50,7 +50,7 @@ const PasswordCreation = ({ open, setOpen, writePassword }) => {
         }
     }
     const getPassword = async () => {
-        await fetch('/api/generatePassword', createPostRequest({
+        await fetch('/api/generatePassword/', createPostRequest({
                 length: passwordLength,
                 isUpper: isUpper,
                 isNumber: isNumber,
