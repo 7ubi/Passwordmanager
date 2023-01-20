@@ -1,3 +1,3 @@
-from .CreateUserSerializer import *
-from .EditPasswordSerializer import *
-from .CreatePasswordSerializer import *
+from .createUserSerializer import *
+from .editPasswordSerializer import *
+from .createPasswordSerializer import *

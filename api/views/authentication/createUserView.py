@@ -1,7 +1,7 @@
 from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.response import Response
-from api.serializer.CreateUserSerializer import *
+from api.serializer.createUserSerializer import *
 
 
 class CreateUserView(APIView):
