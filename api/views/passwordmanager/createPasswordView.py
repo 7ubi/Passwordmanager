@@ -3,7 +3,8 @@ from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework import permissions
-from api.serializer import *
+from api.serializer import CreatePasswordSerializer
+from api.models import *
 
 
 class CreatePasswordView(APIView):
