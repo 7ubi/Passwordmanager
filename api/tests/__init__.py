@@ -1,3 +1,1 @@
-from .managedPasswordTest import *
-from .managedPasswordClientTests import *
-from .passwordGenerationClientTest import *
+from api.tests.passwordmanager import *
