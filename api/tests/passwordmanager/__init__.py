@@ -3,3 +3,4 @@ from .managedPasswordClientTests import *
 from .passwordGenerationClientTest import *
 from .createPasswordClientTest import *
 from .deletePasswordClientTest import *
+from .editPasswordClientTest import *

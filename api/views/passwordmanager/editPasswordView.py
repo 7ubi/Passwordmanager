@@ -2,7 +2,7 @@ from rest_framework.authentication import SessionAuthentication, BasicAuthentica
 from rest_framework.views import APIView
 from rest_framework import status, permissions
 from rest_framework.response import Response
-from api.serializer import EditPasswordSerializer
+from api.serializer import EditPasswordSerializer, CreatePasswordSerializer
 from api.models import *
 
 
@@ -41,6 +41,6 @@ class EditPasswordView(APIView):
             if managed_password is None:
                 return Response(status=status.HTTP_404_NOT_FOUND)
 
-            return Response(CreatePasswordSerializer(managed_password).data, status=status.HTTP_201_CREATED)
+            return Response(CreatePasswordSerializer(managed_password).data, status=status.HTTP_200_OK)
 
         return Response(status=status.HTTP_400_BAD_REQUEST)
